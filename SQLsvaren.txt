@@ -1,0 +1,54 @@
+
+
+Your name: Axel Roselius :)
+
+
+1. The following tables contain these records:
+
+
+tbStudent
+ID 	Name	Age	
+1	Stina	25
+2	Berit	46
+3	Sune	22
+4	Stavros	67
+5	Bengt 	61
+6	Daniel	19
+7	Bengt	35
+tbAttendsCourse
+StudentID 	CourseCode
+1	KIN231
+2	JAP267
+3	THA788
+4	KIN231
+5	THA788
+6	KIN231
+1	THA788
+4          	JAP 267
+tbCourse
+Code 	Name		Points
+KIN 231 	Kinesiska Grund	20
+THA788	Thai fortsättning	10
+JAP267	Japanska fortsättning	10
+
+
+Question 1.A. Write a SELECT statement that lists all students attending “Kinesiska Grund”.
+
+SELECT S.ID, S.name
+	FROM tbStudent AS S
+		WHERE S.ID in (SELECT ID FROM tbAttendsCourse WHERE CourseCode == "KIN231")
+
+
+Question 1.B. Write a SELECT statement for all students attending courses. The result shall list the Name of the student, the Name of the course they are attending and the Points for that course. Students attending multiple courses can and may appear several times in the result.
+
+SELECT S.Name, C.name, C.Points
+	FROM tbStudent AS S AND tbCourse AS C
+		WHERE S.ID == tbAttendsCourse.StudentID AND C.Code == tbAttendsCourse.Course/Courses
+
+Question 1.C. Write a SELECT statement that lists all students not attending any course.
+
+SELECT * FROM tbStudent 
+	WHERE tbStudent.ID NOT IN (SELECT ID from tbAttendsCourse)
+
+Question 2. Extend the table structure above to include Teacher and the Course/Courses that Teacher Teaches. We want to keep track of a TeacherID, the Name and the Age of the teacher.
+Make a table structure that keeps track of this information.
